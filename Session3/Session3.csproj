@@ -141,6 +141,7 @@
     <Compile Include="VerPasaporte.Designer.cs">
       <DependentUpon>VerPasaporte.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewClass\Pasajero.cs" />
     <Compile Include="ViewClass\Vuelo.cs" />
     <EmbeddedResource Include="FormBusqueda.resx">
       <DependentUpon>FormBusqueda.cs</DependentUpon>

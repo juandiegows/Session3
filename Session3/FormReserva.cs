@@ -1,4 +1,5 @@
 ﻿using Session3.Modelo;
+using Session3.ViewClass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace Session3
     {
         public int VueloOrigen { get; set; }
         public int VueloDestino { get; set; }
+        public int TipoCabina { get; set; }
         public FormReserva()
         {
             InitializeComponent();
@@ -27,6 +29,7 @@ namespace Session3
 
         private void FormReserva_Load(object sender, EventArgs e)
         {
+            llenarPasajero();
             using(Session3Entities model = new Modelo.Session3Entities())
             {
                 Schedules vuelo = model.Schedules.FirstOrDefault(x => x.ID == VueloOrigen);
@@ -56,8 +59,10 @@ namespace Session3
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(openFileDialog1.ShowDialog() == DialogResult.Yes)
+          
+            if(openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+              
                 lblRuta.Text = openFileDialog1.FileName;
                 pictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
             }
@@ -72,6 +77,37 @@ namespace Session3
             r.Show();
             this.Enabled = false;
             r.FormClosed += (object s, FormClosedEventArgs e1) => { this.Enabled = true; };
+        }
+
+        private void llenarPasajero()
+        {
+            using (Modelo.Session3Entities model = new Session3Entities())
+            {
+                List<Pasajero> pasajeros = (from x in model.Tickets
+                                            join co in model.Countries
+                                            on x.PassportCountryID equals co.ID
+                                            select new Pasajero {
+                                                Apellido = x.Lastname,
+                                                Nombre = x.Firstname,
+                                                Fecha = x.Schedules.Date.ToString(),
+                                                PaisPasaporte = co.Name,
+                                                Pasaporte = x.PassportNumber,
+                                                Telefono = x.Phone,
+                                                ID = x.ID
+                                            }).ToList();
+            }
+        }
+        private void button5_Click(object sender, EventArgs e)
+        {
+            using(Session3Entities model = new Session3Entities())
+            {
+
+            }
+        }
+
+        private void groupBox4_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

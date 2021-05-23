@@ -89,60 +89,73 @@ namespace Session3
             LlenarAeropuerto(comboBox2);
             LlenarTipoCabina(comboBox3);
         }
-
-    
-        private void button2_Click(object sender, EventArgs e)
+        private void llenarVueloDestino()
         {
             int.TryParse(comboBox3.SelectedValue.ToString(), out int tipocabina);
             int.TryParse(comboBox1.SelectedValue.ToString(), out int origen);
             int.TryParse(comboBox2.SelectedValue.ToString(), out int destino);
-            groupBox3.Visible = true;
-            groupBox2.Dock = DockStyle.Top;
-            groupBox4.Dock = DockStyle.None;
+
             using (Session3Entities model = new Session3Entities())
             {
-               
-                if(tipocabina == 0 && origen ==0 && destino == 0)
+                List<Vuelo> vuelos = (from x in model.Schedules
+                                      where x.Routes.DepartureAirportID == destino && x.Routes.ArrivalAirportID == origen && x.Date == dateTimePicker2.Value.Date
+                                      select new Vuelo
+                                      {
+                                          Origen = x.Routes.Airports.IATACode,
+                                          Destino = x.Routes.Airports1.IATACode,
+                                          ID = x.ID,
+                                          Fecha = x.Date.ToString(),
+                                          Hora = x.Time.ToString(),
+                                          NumeroVuelo = x.FlightNumber,
+                                          PrecioCabina = ((tipocabina == 1) ? x.EconomyPrice : ((tipocabina == 2) ? (x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) : x.EconomyPrice + ((x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) * (decimal)0.35))).ToString()
+
+                                      }).ToList();
+                dataGridView2.DataSource = vuelos;
+            }
+
+        }
+    
+        private void llenarVueloOrigen()
+        {
+            int.TryParse(comboBox3.SelectedValue.ToString(), out int tipocabina);
+            int.TryParse(comboBox1.SelectedValue.ToString(), out int origen);
+            int.TryParse(comboBox2.SelectedValue.ToString(), out int destino);
+            using (Session3Entities model = new Session3Entities())
+            {
+
+                if (tipocabina == 0 && origen == 0 && destino == 0)
                 {
                     MessageBox.Show("selecciona todos los datos");
                     return;
                 }
                 List<Vuelo> vuelos = (from x in model.Schedules
                                       where x.Routes.DepartureAirportID == origen && x.Routes.ArrivalAirportID == destino && x.Date == dateTimePicker1.Value.Date
-                          select new Vuelo
-                          {
-                              Origen = x.Routes.Airports.IATACode,
-                              Destino = x.Routes.Airports1.IATACode,
-                              ID = x.ID,
-                              Fecha = x.Date.ToString(),
-                              Hora = x.Time.ToString(),
-                              NumeroVuelo = x.FlightNumber,
-                              PrecioCabina = ((tipocabina == 1) ? x.EconomyPrice : ((tipocabina == 2) ? (x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) : x.EconomyPrice + ((x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) * (decimal)0.35))).ToString()
+                                      select new Vuelo
+                                      {
+                                          Origen = x.Routes.Airports.IATACode,
+                                          Destino = x.Routes.Airports1.IATACode,
+                                          ID = x.ID,
+                                          Fecha = x.Date.ToString(),
+                                          Hora = x.Time.ToString(),
+                                          NumeroVuelo = x.FlightNumber,
+                                          PrecioCabina = ((tipocabina == 1) ? x.EconomyPrice : ((tipocabina == 2) ? (x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) : x.EconomyPrice + ((x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) * (decimal)0.35))).ToString()
 
-                          }).ToList();
+                                      }).ToList();
                 dataGridView1.DataSource = vuelos;
-               
+
             }
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+          
+            groupBox3.Visible = true;
+            groupBox2.Dock = DockStyle.Top;
+            groupBox4.Dock = DockStyle.None;
+            llenarVueloOrigen();
 
             if (radioButton1.Checked)
             {
-                using (Session3Entities model = new Session3Entities())
-                {
-                    List<Vuelo> vuelos = (from x in model.Schedules
-                                          where x.Routes.DepartureAirportID == destino && x.Routes.ArrivalAirportID == origen && x.Date == dateTimePicker2.Value.Date
-                                          select new Vuelo
-                                          {
-                                              Origen = x.Routes.Airports.IATACode,
-                                              Destino = x.Routes.Airports1.IATACode,
-                                              ID = x.ID,
-                                              Fecha = x.Date.ToString(),
-                                              Hora = x.Time.ToString(),
-                                              NumeroVuelo = x.FlightNumber,
-                                              PrecioCabina = ((tipocabina == 1) ? x.EconomyPrice : ((tipocabina == 2) ? (x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) : x.EconomyPrice + ((x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) * (decimal)0.35))).ToString()
-
-                                          }).ToList();
-                    dataGridView2.DataSource = vuelos;
-                }
+                llenarVueloDestino();
             }
             else
             {
@@ -163,9 +176,10 @@ namespace Session3
                 using (Session3Entities model = new Session3Entities())
                 {
 
-
+                    DateTime f1 = dateTimePicker1.Value.Date.AddDays(-3);
+                    DateTime f2 = dateTimePicker1.Value.Date.AddDays(3);
                     List<Vuelo> vuelos = (from x in model.Schedules
-                                          where x.Routes.DepartureAirportID == origen && x.Routes.ArrivalAirportID == destino && x.Date >= dateTimePicker1.Value.Date.AddDays(-3) && x.Date <= dateTimePicker1.Value.Date.AddDays(3)
+                                          where x.Routes.DepartureAirportID == origen && x.Routes.ArrivalAirportID == destino && x.Date >= f1.Date && x.Date <= f2.Date
                                           select new Vuelo
                                           {
                                               Origen = x.Routes.Airports.IATACode,
@@ -181,6 +195,10 @@ namespace Session3
 
                 }
             }
+            else
+            {
+                llenarVueloOrigen();
+            }
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -188,14 +206,15 @@ namespace Session3
             int.TryParse(comboBox3.SelectedValue.ToString(), out int tipocabina);
             int.TryParse(comboBox1.SelectedValue.ToString(), out int origen);
             int.TryParse(comboBox2.SelectedValue.ToString(), out int destino);
-            if (checkBox1.Checked)
+            if (checkBox2.Checked)
             {
                 using (Session3Entities model = new Session3Entities())
                 {
 
-
+                    DateTime f1 = dateTimePicker1.Value.Date.AddDays(-3);
+                    DateTime f2 = dateTimePicker1.Value.Date.AddDays(3);
                     List<Vuelo> vuelos = (from x in model.Schedules
-                                          where x.Routes.DepartureAirportID == destino && x.Routes.ArrivalAirportID == origen && x.Date >= dateTimePicker1.Value.Date.AddDays(-3) && x.Date <= dateTimePicker1.Value.Date.AddDays(3)
+                                          where x.Routes.DepartureAirportID == destino && x.Routes.ArrivalAirportID == origen && x.Date >= f1.Date && x.Date <= f2.Date
                                           select new Vuelo
                                           {
                                               Origen = x.Routes.Airports.IATACode,
@@ -207,9 +226,13 @@ namespace Session3
                                               PrecioCabina = ((tipocabina == 1) ? x.EconomyPrice : ((tipocabina == 2) ? (x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) : x.EconomyPrice + ((x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) * (decimal)0.35))).ToString()
 
                                           }).ToList();
-                    dataGridView1.DataSource = vuelos;
+                    dataGridView2.DataSource = vuelos;
 
                 }
+            }
+            else
+            {
+                llenarVueloDestino();
             }
         }
     }

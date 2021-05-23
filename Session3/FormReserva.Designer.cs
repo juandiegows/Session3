@@ -51,6 +51,7 @@
             this.origen2 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.lblRuta = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -74,7 +75,6 @@
             this.button4 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -341,6 +341,18 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Datos del pasajero";
             // 
+            // button5
+            // 
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Location = new System.Drawing.Point(485, 174);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(196, 34);
+            this.button5.TabIndex = 23;
+            this.button5.Text = "Agregar pasajero";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -389,6 +401,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(697, 74);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(158, 148);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 20;
             this.pictureBox1.TabStop = false;
             // 
@@ -495,6 +508,7 @@
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Lista de pasajero";
+            this.groupBox4.Enter += new System.EventHandler(this.groupBox4_Enter);
             // 
             // button1
             // 
@@ -557,19 +571,8 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "foto pasaporte";
-            this.openFileDialog1.Filter = "Imagen png|(*.png)|Imagen jpg|(*.jpg";
+            this.openFileDialog1.Filter = "Imagen jpg|*.jpg|Imagen png|*.png|Otros|*.*";
             this.openFileDialog1.Title = "Buscar pasaporte";
-            // 
-            // button5
-            // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(485, 174);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(196, 34);
-            this.button5.TabIndex = 23;
-            this.button5.Text = "Agregar pasajero";
-            this.button5.UseVisualStyleBackColor = true;
             // 
             // FormReserva
             // 

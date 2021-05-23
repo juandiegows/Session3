@@ -1,4 +1,5 @@
 ﻿using Session3.Modelo;
+using Session3.ViewClass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,7 +34,22 @@ namespace Session3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form r = new FormReserva();
+            int VueloDes = 0;
+            try
+            {
+                VueloDes = (int)dataGridView2.CurrentRow.Cells[0].Value;
+            }
+            catch (Exception)
+            {
+
+              
+            }
+       
+            Form r = new FormReserva()
+            {
+                VueloOrigen = (int)dataGridView1.CurrentRow.Cells[0].Value,
+                VueloDestino = VueloDes
+            };
             r.Show();
             this.Hide();
             r.FormClosed += (object s, FormClosedEventArgs e1) =>  {  this.Show();  };
@@ -74,20 +90,127 @@ namespace Session3
             LlenarTipoCabina(comboBox3);
         }
 
+    
         private void button2_Click(object sender, EventArgs e)
         {
-
+            int.TryParse(comboBox3.SelectedValue.ToString(), out int tipocabina);
+            int.TryParse(comboBox1.SelectedValue.ToString(), out int origen);
+            int.TryParse(comboBox2.SelectedValue.ToString(), out int destino);
+            groupBox3.Visible = true;
+            groupBox2.Dock = DockStyle.Top;
+            groupBox4.Dock = DockStyle.None;
             using (Session3Entities model = new Session3Entities())
             {
-                
+               
+                if(tipocabina == 0 && origen ==0 && destino == 0)
+                {
+                    MessageBox.Show("selecciona todos los datos");
+                    return;
+                }
+                List<Vuelo> vuelos = (from x in model.Schedules
+                                      where x.Routes.DepartureAirportID == origen && x.Routes.ArrivalAirportID == destino && x.Date == dateTimePicker1.Value.Date
+                          select new Vuelo
+                          {
+                              Origen = x.Routes.Airports.IATACode,
+                              Destino = x.Routes.Airports1.IATACode,
+                              ID = x.ID,
+                              Fecha = x.Date.ToString(),
+                              Hora = x.Time.ToString(),
+                              NumeroVuelo = x.FlightNumber,
+                              PrecioCabina = ((tipocabina == 1) ? x.EconomyPrice : ((tipocabina == 2) ? (x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) : x.EconomyPrice + ((x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) * (decimal)0.35))).ToString()
+
+                          }).ToList();
+                dataGridView1.DataSource = vuelos;
                
             }
 
             if (radioButton1.Checked)
             {
+                using (Session3Entities model = new Session3Entities())
+                {
+                    List<Vuelo> vuelos = (from x in model.Schedules
+                                          where x.Routes.DepartureAirportID == destino && x.Routes.ArrivalAirportID == origen && x.Date == dateTimePicker2.Value.Date
+                                          select new Vuelo
+                                          {
+                                              Origen = x.Routes.Airports.IATACode,
+                                              Destino = x.Routes.Airports1.IATACode,
+                                              ID = x.ID,
+                                              Fecha = x.Date.ToString(),
+                                              Hora = x.Time.ToString(),
+                                              NumeroVuelo = x.FlightNumber,
+                                              PrecioCabina = ((tipocabina == 1) ? x.EconomyPrice : ((tipocabina == 2) ? (x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) : x.EconomyPrice + ((x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) * (decimal)0.35))).ToString()
 
+                                          }).ToList();
+                    dataGridView2.DataSource = vuelos;
+                }
+            }
+            else
+            {
+                groupBox3.Visible = false;
+                groupBox2.Dock = DockStyle.Fill;
+                groupBox4.Dock = DockStyle.Bottom;
             }
            
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            int.TryParse(comboBox3.SelectedValue.ToString(), out int tipocabina);
+            int.TryParse(comboBox1.SelectedValue.ToString(), out int origen);
+            int.TryParse(comboBox2.SelectedValue.ToString(), out int destino);
+            if (checkBox1.Checked)
+            {
+                using (Session3Entities model = new Session3Entities())
+                {
+
+
+                    List<Vuelo> vuelos = (from x in model.Schedules
+                                          where x.Routes.DepartureAirportID == origen && x.Routes.ArrivalAirportID == destino && x.Date >= dateTimePicker1.Value.Date.AddDays(-3) && x.Date <= dateTimePicker1.Value.Date.AddDays(3)
+                                          select new Vuelo
+                                          {
+                                              Origen = x.Routes.Airports.IATACode,
+                                              Destino = x.Routes.Airports1.IATACode,
+                                              ID = x.ID,
+                                              Fecha = x.Date.ToString(),
+                                              Hora = x.Time.ToString(),
+                                              NumeroVuelo = x.FlightNumber,
+                                              PrecioCabina = ((tipocabina == 1) ? x.EconomyPrice : ((tipocabina == 2) ? (x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) : x.EconomyPrice + ((x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) * (decimal)0.35))).ToString()
+
+                                          }).ToList();
+                    dataGridView1.DataSource = vuelos;
+
+                }
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            int.TryParse(comboBox3.SelectedValue.ToString(), out int tipocabina);
+            int.TryParse(comboBox1.SelectedValue.ToString(), out int origen);
+            int.TryParse(comboBox2.SelectedValue.ToString(), out int destino);
+            if (checkBox1.Checked)
+            {
+                using (Session3Entities model = new Session3Entities())
+                {
+
+
+                    List<Vuelo> vuelos = (from x in model.Schedules
+                                          where x.Routes.DepartureAirportID == destino && x.Routes.ArrivalAirportID == origen && x.Date >= dateTimePicker1.Value.Date.AddDays(-3) && x.Date <= dateTimePicker1.Value.Date.AddDays(3)
+                                          select new Vuelo
+                                          {
+                                              Origen = x.Routes.Airports.IATACode,
+                                              Destino = x.Routes.Airports1.IATACode,
+                                              ID = x.ID,
+                                              Fecha = x.Date.ToString(),
+                                              Hora = x.Time.ToString(),
+                                              NumeroVuelo = x.FlightNumber,
+                                              PrecioCabina = ((tipocabina == 1) ? x.EconomyPrice : ((tipocabina == 2) ? (x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) : x.EconomyPrice + ((x.EconomyPrice + (x.EconomyPrice * (decimal)0.30)) * (decimal)0.35))).ToString()
+
+                                          }).ToList();
+                    dataGridView1.DataSource = vuelos;
+
+                }
+            }
         }
     }
 }

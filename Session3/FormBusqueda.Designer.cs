@@ -296,6 +296,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Reservar Vuelo";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -343,6 +344,7 @@
             this.Padding = new System.Windows.Forms.Padding(10);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busquedad de vuelos";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormBusquedadVuelo_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

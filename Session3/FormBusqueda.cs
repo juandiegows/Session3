@@ -29,5 +29,18 @@ namespace Session3
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form r = new FormReserva();
+            r.Show();
+            this.Hide();
+            r.FormClosed += (object s, FormClosedEventArgs e1) =>  {  this.Show();  };
+        }
+
+        private void FormBusquedadVuelo_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
     }
 }

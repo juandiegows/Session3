@@ -96,6 +96,7 @@
             this.button2.TabIndex = 12;
             this.button2.Text = "Aplicar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // dateTimePicker2
             // 
@@ -143,6 +144,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(18, 70);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(133, 25);
@@ -346,6 +348,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busquedad de vuelos";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormBusquedadVuelo_FormClosed);
+            this.Load += new System.EventHandler(this.FormBusquedadVuelo_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

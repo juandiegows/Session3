@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Session3.Modelo;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -41,6 +42,52 @@ namespace Session3
         private void FormBusquedadVuelo_FormClosed(object sender, FormClosedEventArgs e)
         {
 
+        }
+
+        public void LlenarAeropuerto(ComboBox combo)
+        {
+            using (Session3Entities model = new Session3Entities())
+            {
+                List<Airports> airports = model.Airports.ToList();
+                airports.Insert(0, new Airports { IATACode = "Seleccione", ID = 0 });
+                combo.DataSource = airports;
+                combo.DisplayMember = "IATACode";
+                combo.ValueMember = "ID";
+            }
+        }
+
+         public void LlenarTipoCabina(ComboBox combo)
+        {
+            using (Session3Entities model = new Session3Entities())
+            {
+                List<CabinTypes> cabinTypes = model.CabinTypes.ToList();
+                cabinTypes.Insert(0, new CabinTypes { Name = "Seleccione",ID = 0 });
+                combo.DataSource = cabinTypes;
+                combo.DisplayMember = "Name";
+                combo.ValueMember = "ID";
+            }
+        }
+        private void FormBusquedadVuelo_Load(object sender, EventArgs e)
+        {
+            LlenarAeropuerto(comboBox1);
+            LlenarAeropuerto(comboBox2);
+            LlenarTipoCabina(comboBox3);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            using (Session3Entities model = new Session3Entities())
+            {
+                
+               
+            }
+
+            if (radioButton1.Checked)
+            {
+
+            }
+           
         }
     }
 }

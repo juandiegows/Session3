@@ -54,19 +54,19 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.lblRuta = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtcel = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label25 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label24 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtPasaporte = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label22 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtApellido = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -127,7 +127,7 @@
             // 
             this.fecha.AutoSize = true;
             this.fecha.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fecha.Location = new System.Drawing.Point(605, 39);
+            this.fecha.Location = new System.Drawing.Point(600, 39);
             this.fecha.Name = "fecha";
             this.fecha.Size = new System.Drawing.Size(62, 19);
             this.fecha.TabIndex = 7;
@@ -242,7 +242,7 @@
             // 
             this.fecha2.AutoSize = true;
             this.fecha2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fecha2.Location = new System.Drawing.Point(609, 39);
+            this.fecha2.Location = new System.Drawing.Point(599, 39);
             this.fecha2.Name = "fecha2";
             this.fecha2.Size = new System.Drawing.Size(62, 19);
             this.fecha2.TabIndex = 7;
@@ -319,19 +319,19 @@
             this.groupBox3.Controls.Add(this.button5);
             this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Controls.Add(this.lblRuta);
-            this.groupBox3.Controls.Add(this.textBox4);
+            this.groupBox3.Controls.Add(this.txtcel);
             this.groupBox3.Controls.Add(this.label26);
             this.groupBox3.Controls.Add(this.pictureBox1);
             this.groupBox3.Controls.Add(this.label25);
             this.groupBox3.Controls.Add(this.comboBox1);
             this.groupBox3.Controls.Add(this.label24);
-            this.groupBox3.Controls.Add(this.textBox3);
+            this.groupBox3.Controls.Add(this.txtPasaporte);
             this.groupBox3.Controls.Add(this.label23);
             this.groupBox3.Controls.Add(this.dateTimePicker2);
             this.groupBox3.Controls.Add(this.label22);
-            this.groupBox3.Controls.Add(this.textBox2);
+            this.groupBox3.Controls.Add(this.txtApellido);
             this.groupBox3.Controls.Add(this.label21);
-            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.txtNombre);
             this.groupBox3.Controls.Add(this.label30);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Location = new System.Drawing.Point(10, 176);
@@ -378,12 +378,12 @@
             this.lblRuta.Text = "...";
             this.lblRuta.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox4
+            // txtcel
             // 
-            this.textBox4.Location = new System.Drawing.Point(98, 144);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(206, 27);
-            this.textBox4.TabIndex = 22;
+            this.txtcel.Location = new System.Drawing.Point(98, 144);
+            this.txtcel.Name = "txtcel";
+            this.txtcel.Size = new System.Drawing.Size(206, 27);
+            this.txtcel.TabIndex = 22;
             // 
             // label26
             // 
@@ -432,12 +432,12 @@
             this.label24.TabIndex = 16;
             this.label24.Text = "Pais  Pasaporte : ";
             // 
-            // textBox3
+            // txtPasaporte
             // 
-            this.textBox3.Location = new System.Drawing.Point(456, 90);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(206, 27);
-            this.textBox3.TabIndex = 15;
+            this.txtPasaporte.Location = new System.Drawing.Point(456, 90);
+            this.txtPasaporte.Name = "txtPasaporte";
+            this.txtPasaporte.Size = new System.Drawing.Size(206, 27);
+            this.txtPasaporte.TabIndex = 15;
             // 
             // label23
             // 
@@ -464,12 +464,12 @@
             this.label22.TabIndex = 12;
             this.label22.Text = "Fecha Nacimiento";
             // 
-            // textBox2
+            // txtApellido
             // 
-            this.textBox2.Location = new System.Drawing.Point(97, 90);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(206, 27);
-            this.textBox2.TabIndex = 3;
+            this.txtApellido.Location = new System.Drawing.Point(97, 90);
+            this.txtApellido.Name = "txtApellido";
+            this.txtApellido.Size = new System.Drawing.Size(206, 27);
+            this.txtApellido.TabIndex = 3;
             // 
             // label21
             // 
@@ -480,12 +480,12 @@
             this.label21.TabIndex = 2;
             this.label21.Text = "Apellidos : ";
             // 
-            // textBox1
+            // txtNombre
             // 
-            this.textBox1.Location = new System.Drawing.Point(97, 44);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(206, 27);
-            this.textBox1.TabIndex = 1;
+            this.txtNombre.Location = new System.Drawing.Point(97, 44);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(206, 27);
+            this.txtNombre.TabIndex = 1;
             // 
             // label30
             // 
@@ -631,20 +631,20 @@
         private System.Windows.Forms.Label origen2;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtPasaporte;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label lblRuta;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtcel;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.GroupBox groupBox4;

@@ -25,25 +25,7 @@ namespace Session3.ViewClass
 
         [DisplayName("Telefono")]
         public String Telefono { set; get; }
-        [DisplayName("Foto Pasaporte")]
-        public DataGridViewButtonCell FotoPasaporte
-        {
-            get
-            {
-                DataGridViewButtonCell c = new DataGridViewButtonCell()
-                {
-                    UseColumnTextForButtonValue = true,
-                    Value = "Ver foto",
-                    FlatStyle = FlatStyle.Flat
-                    
-                
-
-
-                };
-                
-                return c;
-
-            }
-        }
+      
+    
     }
 }

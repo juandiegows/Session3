@@ -35,6 +35,7 @@ namespace Session3
         private void button1_Click(object sender, EventArgs e)
         {
             int VueloDes = 0;
+
             try
             {
                 VueloDes = (int)dataGridView2.CurrentRow.Cells[0].Value;
@@ -48,7 +49,8 @@ namespace Session3
             Form r = new FormReserva()
             {
                 VueloOrigen = (int)dataGridView1.CurrentRow.Cells[0].Value,
-                VueloDestino = VueloDes
+                VueloDestino = VueloDes,
+                TipoCabina =  (int)comboBox3.SelectedValue
             };
             r.Show();
             this.Hide();

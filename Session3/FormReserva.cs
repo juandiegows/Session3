@@ -30,6 +30,7 @@ namespace Session3
         private void FormReserva_Load(object sender, EventArgs e)
         {
             llenarPasajero();
+            CargarPaises();
             using(Session3Entities model = new Modelo.Session3Entities())
             {
                 Schedules vuelo = model.Schedules.FirstOrDefault(x => x.ID == VueloOrigen);
@@ -95,13 +96,80 @@ namespace Session3
                                                 Telefono = x.Phone,
                                                 ID = x.ID
                                             }).ToList();
+                dataGridView2.DataSource = pasajeros;
             }
         }
         private void button5_Click(object sender, EventArgs e)
         {
+            int passID = 0;
+            int.TryParse(comboBox1.SelectedValue.ToString(), out passID);
+            using(Session3Entities model = new Session3Entities())
+            {
+                model.Tickets.Add(new Tickets {
+                    Firstname = txtNombre.Text,
+                    Lastname = txtApellido.Text,
+                    PassportNumber = txtPasaporte.Text,
+                    Phone = txtcel.Text,
+                    CabinTypeID = TipoCabina,
+                    PassportCountryID =passID,
+                    ScheduleID = VueloOrigen,
+                    PassportPhoto = openFileDialog1.FileName,
+                    Confirmed = false,
+                    BookingReference = "",
+                    Email = null,
+                    UserID = 1
+                  
+                    
+
+                });
+
+                if (VueloDestino != 0)
+                {
+                    model.Tickets.Add(new Tickets
+                    {
+                        Firstname = txtNombre.Text,
+                        Lastname = txtApellido.Text,
+                        PassportNumber = txtPasaporte.Text,
+                        Phone = txtcel.Text,
+                        CabinTypeID = TipoCabina,
+                        PassportCountryID = passID,
+                        ScheduleID = VueloDestino,
+                        PassportPhoto = openFileDialog1.FileName,
+                        Confirmed = false,
+                        BookingReference = "",
+                        Email = null,
+                        UserID = 1
+
+
+
+                    });
+                }
+                int result = model.SaveChanges();
+                if (result == 1)
+                {
+                    MessageBox.Show("Se ha agregado el usuario el vuelo de ida");
+                    llenarPasajero();
+                }
+                else if (result == 2)
+                {
+                    MessageBox.Show("Se ha agregado el usuario el vuelo de ida y retorno");
+                    llenarPasajero();
+                }
+                else
+                {
+                    MessageBox.Show("No se puedo agregar el pasajero");
+                }
+            }
+        }
+
+        private void CargarPaises()
+        {
             using(Session3Entities model = new Session3Entities())
             {
 
+                comboBox1.DataSource = model.Countries.ToList();
+                comboBox1.DisplayMember = "Name";
+                comboBox1.ValueMember = "ID";
             }
         }
 
